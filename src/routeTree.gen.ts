@@ -9,10 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VeilleRouteImport } from './routes/veille'
+import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as E5RouteImport } from './routes/e5'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CompetencesRouteImport } from './routes/competences'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjetsIndexRouteImport } from './routes/projets.index'
 import { Route as ProjetsSlugRouteImport } from './routes/projets.$slug'
 
+const VeilleRoute = VeilleRouteImport.update({
+  id: '/veille',
+  path: '/veille',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceRoute = ExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const E5Route = E5RouteImport.update({
+  id: '/e5',
+  path: '/e5',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompetencesRoute = CompetencesRouteImport.update({
+  id: '/competences',
+  path: '/competences',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +61,116 @@ const ProjetsSlugRoute = ProjetsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/competences': typeof CompetencesRoute
+  '/contact': typeof ContactRoute
+  '/e5': typeof E5Route
+  '/experience': typeof ExperienceRoute
+  '/veille': typeof VeilleRoute
   '/projets/$slug': typeof ProjetsSlugRoute
   '/projets/': typeof ProjetsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/competences': typeof CompetencesRoute
+  '/contact': typeof ContactRoute
+  '/e5': typeof E5Route
+  '/experience': typeof ExperienceRoute
+  '/veille': typeof VeilleRoute
   '/projets/$slug': typeof ProjetsSlugRoute
   '/projets': typeof ProjetsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/competences': typeof CompetencesRoute
+  '/contact': typeof ContactRoute
+  '/e5': typeof E5Route
+  '/experience': typeof ExperienceRoute
+  '/veille': typeof VeilleRoute
   '/projets/$slug': typeof ProjetsSlugRoute
   '/projets/': typeof ProjetsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/projets/$slug' | '/projets/'
+  fullPaths:
+    | '/'
+    | '/competences'
+    | '/contact'
+    | '/e5'
+    | '/experience'
+    | '/veille'
+    | '/projets/$slug'
+    | '/projets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/projets/$slug' | '/projets'
-  id: '__root__' | '/' | '/projets/$slug' | '/projets/'
+  to:
+    | '/'
+    | '/competences'
+    | '/contact'
+    | '/e5'
+    | '/experience'
+    | '/veille'
+    | '/projets/$slug'
+    | '/projets'
+  id:
+    | '__root__'
+    | '/'
+    | '/competences'
+    | '/contact'
+    | '/e5'
+    | '/experience'
+    | '/veille'
+    | '/projets/$slug'
+    | '/projets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompetencesRoute: typeof CompetencesRoute
+  ContactRoute: typeof ContactRoute
+  E5Route: typeof E5Route
+  ExperienceRoute: typeof ExperienceRoute
+  VeilleRoute: typeof VeilleRoute
   ProjetsSlugRoute: typeof ProjetsSlugRoute
   ProjetsIndexRoute: typeof ProjetsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/veille': {
+      id: '/veille'
+      path: '/veille'
+      fullPath: '/veille'
+      preLoaderRoute: typeof VeilleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience': {
+      id: '/experience'
+      path: '/experience'
+      fullPath: '/experience'
+      preLoaderRoute: typeof ExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/e5': {
+      id: '/e5'
+      path: '/e5'
+      fullPath: '/e5'
+      preLoaderRoute: typeof E5RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/competences': {
+      id: '/competences'
+      path: '/competences'
+      fullPath: '/competences'
+      preLoaderRoute: typeof CompetencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,9 +197,23 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompetencesRoute: CompetencesRoute,
+  ContactRoute: ContactRoute,
+  E5Route: E5Route,
+  ExperienceRoute: ExperienceRoute,
+  VeilleRoute: VeilleRoute,
   ProjetsSlugRoute: ProjetsSlugRoute,
   ProjetsIndexRoute: ProjetsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
