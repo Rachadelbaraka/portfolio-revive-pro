@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/useReveal";
 import { Section } from "@/components/Section";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 
 export const Route = createFileRoute("/projets/$slug")({
   loader: ({ params }) => {
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/projets/$slug")({
 
 function ProjectDetail() {
   useReveal();
-  const { project: p } = Route.useLoaderData();
+  const { project: p } = Route.useLoaderData() as { project: Project };
 
   return (
     <Section>
