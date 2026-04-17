@@ -2,7 +2,9 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 
-const links = [
+type NavLink = { to: string; label: string; highlight?: boolean };
+
+const links: NavLink[] = [
   { to: "/", label: "Accueil" },
   { to: "/projets", label: "Projets" },
   { to: "/competences", label: "Compétences" },
@@ -10,7 +12,7 @@ const links = [
   { to: "/veille", label: "Veille" },
   { to: "/e5", label: "Épreuve E5", highlight: true },
   { to: "/contact", label: "Contact" },
-] as const;
+];
 
 export function Header() {
   const { theme, toggle } = useTheme();
