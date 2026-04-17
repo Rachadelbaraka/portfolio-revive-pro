@@ -106,7 +106,7 @@ function HomePage() {
               Synthèse E5 — Bloc 1
             </div>
             <div className="flex flex-col gap-4">
-              <Stat label="Projets E5" value="6" tone="primary" />
+              <Stat label="Projets E5" value="5" tone="primary" />
               <div className="h-px bg-border" />
               <Stat label="Compétences couvertes" value="6/6" tone="success" />
               <div className="h-px bg-border" />

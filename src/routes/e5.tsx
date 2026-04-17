@@ -28,13 +28,13 @@ const competences = [
     code: "B1.1",
     title: "Gérer le patrimoine informatique",
     desc: "Installation, déploiement, mise à jour, documentation et optimisation des systèmes.",
-    projects: ["MoreFix WebStore", "Enterprise RAG Pipeline", "Go Distributed Orderbook"],
+    projects: ["MoreFix WebStore", "HabitTrack", "Go Distributed Orderbook"],
   },
   {
     code: "B1.2",
     title: "Répondre aux incidents et demandes d'assistance",
     desc: "Support technique, résolution d'incidents, monitoring et maintenance préventive.",
-    projects: ["Enterprise RAG Pipeline", "Go Distributed Orderbook", "Stage TechPC"],
+    projects: ["Go Distributed Orderbook", "Stage TechPC"],
   },
   {
     code: "B1.3",
@@ -46,13 +46,13 @@ const competences = [
     code: "B1.4",
     title: "Travailler en mode projet",
     desc: "Méthodologies Agile/Kanban, gestion des livrables, versionnement Git, collaboration.",
-    projects: ["MoreFix WebStore", "Enterprise RAG Pipeline", "Mindful Journal", "Go Distributed Orderbook"],
+    projects: ["MoreFix WebStore", "HabitTrack", "Mindful Journal", "Go Distributed Orderbook"],
   },
   {
     code: "B1.5",
     title: "Mettre à disposition un service informatique",
     desc: "Déploiement en production, monitoring continu, sécurisation et haute disponibilité.",
-    projects: ["MoreFix WebStore", "Enterprise RAG Pipeline", "Mindful Journal", "Go Distributed Orderbook"],
+    projects: ["MoreFix WebStore", "HabitTrack", "Mindful Journal", "Go Distributed Orderbook"],
   },
   {
     code: "B1.6",
@@ -80,7 +80,7 @@ function E5Page() {
 
       <div className="reveal mt-8 flex flex-wrap justify-center gap-4">
         {[
-          { num: "6", label: "Projets E5" },
+          { num: "5", label: "Projets E5" },
           { num: "6/6", label: "Compétences" },
           { num: "2", label: "Stages" },
           { num: "100%", label: "Open source" },

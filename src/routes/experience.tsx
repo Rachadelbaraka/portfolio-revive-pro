@@ -34,8 +34,8 @@ const items: Item[] = [
   {
     icon: "🛠️",
     title: "Technicien support / développeur",
-    company: "TechPC — Stage BTS SIO 2",
-    period: "2025",
+    company: "TechPC — Stage BTS SIO",
+    period: "Mai 2025 — Juin 2025",
     type: "stage",
     desc: "Maintenance et support utilisateur, automatisation d'inventaire et déploiements logiciels.",
     achievements: [
@@ -47,9 +47,9 @@ const items: Item[] = [
   {
     icon: "🚀",
     title: "Développeur Full-Stack — MoreFix",
-    company: "Projet entrepreneurial",
-    period: "2024 — aujourd'hui",
-    type: "projet",
+    company: "Stage BTS SIO 2",
+    period: "Janvier 2026 — Février 2026",
+    type: "stage",
     desc: "Conception complète d'une boutique en ligne pour produits reconditionnés, du design à la production.",
     achievements: [
       "Architecture Next.js + Firebase",
@@ -57,30 +57,31 @@ const items: Item[] = [
       "Déploiement Vercel + monitoring",
     ],
   },
+];
+
+type Recommendation = {
+  author: string;
+  role: string;
+  company: string;
+  quotes: string[];
+};
+
+const recommendations: Recommendation[] = [
   {
-    icon: "🤖",
-    title: "Pipeline IA distribué",
-    company: "Projet personnel — Open Source",
-    period: "2024",
-    type: "projet",
-    desc: "Construction d'un pipeline RAG distribué traitant 10k+ documents/jour pour la recherche sémantique.",
-    achievements: [
-      "Workers Go, embeddings Python",
-      "Monitoring Prometheus + Grafana",
-      "Tests d'intégration end-to-end",
+    author: "KHAMIS YASSER",
+    role: "Directeur",
+    company: "MoreFix",
+    quotes: [
+      "Le stagiaire fait preuve d'une grande autonomie, d'une rigueur technique remarquable et d'une forte capacité d'adaptation. Il démontre également une maturité professionnelle notable au regard de son niveau d'études.",
+      "Au-delà du respect des règles, le stagiaire a adopté une posture professionnelle mature, démontrant sérieux, fiabilité et sens des responsabilités. Il a su inspirer confiance et s'imposer comme un membre à part entière de l'équipe.",
     ],
   },
   {
-    icon: "💻",
-    title: "Stage découverte technique",
-    company: "BTS SIO 1 — Stage initiation",
-    period: "2024",
-    type: "stage",
-    desc: "Découverte du métier, gestion de parc et premières contributions front-end en équipe.",
-    achievements: [
-      "Audit du parc informatique",
-      "Refonte d'une page interne",
-      "Veille technologique partagée",
+    author: "Abdelnacer MEKKI",
+    role: "Directeur",
+    company: "TechPC",
+    quotes: [
+      "Rachad EL BARAKA a réalisé un stage de grande qualité au sein de notre entreprise. Sérieux, autonome et impliqué, il a su s'intégrer rapidement et contribuer efficacement à nos projets, notamment sur le développement web et l'optimisation de notre plateforme. Ses compétences techniques, sa rigueur et sa capacité à proposer des solutions pertinentes ont été particulièrement appréciées. Nous recommandons vivement son profil.",
     ],
   },
 ];
@@ -157,6 +158,57 @@ function ExperiencePage() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Recommandations */}
+      <div className="mt-16">
+        <div className="reveal mb-8">
+          <Eyebrow>Recommandations</Eyebrow>
+          <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
+            Avis de mes maîtres de stage
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
+            Témoignages reçus à l'issue de mes périodes en entreprise.
+          </p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          {recommendations.map((r) => (
+            <article
+              key={r.author}
+              className="reveal flex flex-col gap-4 rounded-2xl border bg-surface p-6 sm:p-7"
+            >
+              <div className="text-3xl leading-none text-primary">"</div>
+              <div className="flex flex-col gap-3">
+                {r.quotes.map((q, idx) => (
+                  <p
+                    key={idx}
+                    className="text-sm italic leading-relaxed text-muted-foreground"
+                  >
+                    {q}
+                  </p>
+                ))}
+              </div>
+              <div className="mt-2 flex items-center gap-3 border-t pt-4">
+                <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary font-display text-sm font-bold text-primary-foreground">
+                  {r.author
+                    .split(" ")
+                    .map((p) => p[0])
+                    .slice(0, 2)
+                    .join("")}
+                </div>
+                <div>
+                  <div className="font-display text-sm font-bold">
+                    {r.author}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {r.role} — {r.company}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </Section>
   );
