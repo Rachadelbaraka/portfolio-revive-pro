@@ -55,7 +55,7 @@ export function Header() {
               return (
                 <Link
                   key={l.to}
-                  to={l.to}
+                  to={l.to as never}
                   className="ml-1 rounded-md bg-gradient-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                 >
                   {l.label}
@@ -65,7 +65,7 @@ export function Header() {
             return (
               <Link
                 key={l.to}
-                to={l.to}
+                to={l.to as never}
                 className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
                   active
                     ? "bg-muted text-foreground"
@@ -147,7 +147,7 @@ export function Header() {
             {links.map((l) => (
               <Link
                 key={l.to}
-                to={l.to}
+                to={l.to as never}
                 className={`rounded-md px-3 py-2 text-sm font-medium ${
                   l.highlight
                     ? "bg-gradient-primary text-primary-foreground"
