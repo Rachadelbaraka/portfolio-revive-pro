@@ -41,13 +41,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Rachad EL BARAKA — Portfolio BTS SIO SLAM" },
+      { title: "Rachad Portfolio" },
       {
         name: "description",
         content:
           "Portfolio de Rachad EL BARAKA, étudiant BTS SIO SLAM. Projets full-stack, IA, systèmes distribués, et épreuve E5.",
       },
-      { property: "og:title", content: "Rachad EL BARAKA — Portfolio BTS SIO SLAM" },
+      { property: "og:title", content: "Rachad Portfolio" },
       {
         property: "og:description",
         content:
@@ -55,6 +55,12 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Rachad Portfolio" },
+      { name: "description", content: "Dynamic Portfolio Booster enhances a portfolio with dynamic features and expanded functionality." },
+      { property: "og:description", content: "Dynamic Portfolio Booster enhances a portfolio with dynamic features and expanded functionality." },
+      { name: "twitter:description", content: "Dynamic Portfolio Booster enhances a portfolio with dynamic features and expanded functionality." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce4c2284-c8cd-4397-8efd-3b3f40daf52d/id-preview-c827257a--172a696d-5dac-442f-9a2a-1a7572c008f4.lovable.app-1776442644045.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce4c2284-c8cd-4397-8efd-3b3f40daf52d/id-preview-c827257a--172a696d-5dac-442f-9a2a-1a7572c008f4.lovable.app-1776442644045.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
