@@ -14,7 +14,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact — Rachad EL BARAKA" },
       {
         property: "og:description",
-        content: "Email, GitHub, LinkedIn — réponse sous 24h en semaine.",
+        content: "Email, GitHub — réponse sous 24h en semaine.",
       },
     ],
   }),
@@ -25,14 +25,8 @@ const contacts = [
   {
     icon: "✉️",
     label: "Email",
-    value: "rachad.elbaraka@example.com",
-    href: "mailto:rachad.elbaraka@example.com",
-  },
-  {
-    icon: "💼",
-    label: "LinkedIn",
-    value: "linkedin.com/in/rachad-elbaraka",
-    href: "https://www.linkedin.com/in/rachad-elbaraka",
+    value: "rachadelbaraka3@gmail.com",
+    href: "mailto:rachadelbaraka3@gmail.com",
   },
   {
     icon: "🐙",
@@ -43,7 +37,7 @@ const contacts = [
   {
     icon: "📍",
     label: "Localisation",
-    value: "France — Open au remote",
+    value: "France — Saint-Étienne",
     href: "#",
   },
 ];
@@ -107,7 +101,7 @@ function ContactForm() {
         const body = encodeURIComponent(
           `${data.get("message") ?? ""}\n\n— ${data.get("name") ?? ""} (${data.get("email") ?? ""})`,
         );
-        window.location.href = `mailto:rachad.elbaraka@example.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:rachadelbaraka3@gmail.com?subject=${subject}&body=${body}`;
       }}
       className="reveal flex flex-col gap-4 rounded-2xl border bg-surface p-6 sm:p-8"
     >
