@@ -26,7 +26,7 @@ export const Route = createFileRoute("/veille")({
 
 const themes = [
   {
-    chip: "IA",
+    chip: "Intelligence artificielle",
     title: "RAG & LLMs en production",
     desc: "Architecture des pipelines Retrieval-Augmented Generation, vector databases (Qdrant, Weaviate), prompt engineering structuré.",
   },
@@ -47,8 +47,8 @@ const themes = [
   },
   {
     chip: "DevOps",
-    title: "Infra as code",
-    desc: "Docker, GitHub Actions, déploiement Vercel/Cloudflare Workers, monitoring Prometheus.",
+    title: "Infrastructure as Code",
+    desc: "Docker, GitHub Actions, déploiement Vercel et Cloudflare Workers, monitoring Prometheus.",
   },
   {
     chip: "Langages",
@@ -70,47 +70,51 @@ function VeillePage() {
   useReveal();
   return (
     <Section>
-      <div className="reveal mb-10">
+      <div className="reveal mb-10 border-b border-border pb-8">
         <Eyebrow>Veille active</Eyebrow>
-        <h1 className="font-display text-3xl font-extrabold sm:text-4xl">
+        <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
           Veille technologique
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
-          Mes sujets de veille réguliers, sources et outils utilisés pour
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Sujets de veille réguliers, sources et outils utilisés pour
           rester à jour.
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {themes.map((t) => (
-          <div
+          <article
             key={t.title}
-            className="reveal rounded-2xl border bg-surface p-6 transition-colors hover:border-[color:var(--accent-2)]/40"
+            className="reveal rounded-2xl border bg-surface p-7 transition-colors hover:border-primary/40"
           >
-            <span className="mb-3 inline-block rounded border border-[color:var(--accent-2)]/20 bg-[color:var(--accent-2)]/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-[color:var(--accent-2)]">
+            <span className="mb-4 inline-block rounded border bg-surface-2 px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
               {t.chip}
             </span>
-            <h3 className="font-display text-base font-bold">{t.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            <h3 className="font-display text-lg font-semibold tracking-tight">
+              {t.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               {t.desc}
             </p>
-          </div>
+          </article>
         ))}
       </div>
 
-      <div className="reveal mt-10 rounded-2xl border bg-surface p-6">
-        <h2 className="font-display text-lg font-bold">Sources principales</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
+      <div className="reveal mt-12 rounded-2xl border bg-surface p-7">
+        <h2 className="font-display text-xl font-semibold tracking-tight">
+          Sources principales
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
           Flux et sites consultés au quotidien.
         </p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2">
           {sources.map((s) => (
             <a
               key={s.name}
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border bg-surface-2 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              className="rounded-full border bg-surface-2 px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
             >
               {s.name} ↗
             </a>
