@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useReveal } from "@/hooks/useReveal";
 import { Section, Eyebrow } from "@/components/Section";
-import { allCategories, allTechs, projects } from "@/data/projects";
+import { projects } from "@/data/projects";
 
 export const Route = createFileRoute("/projets/")({
   head: () => ({
@@ -11,13 +11,13 @@ export const Route = createFileRoute("/projets/")({
       {
         name: "description",
         content:
-          "Tous les projets techniques : full-stack, IA distribuée, PWA, systèmes haute performance.",
+          "Réalisations techniques : applications full-stack, systèmes distribués, PWA et veille technologique.",
       },
       { property: "og:title", content: "Projets — Rachad EL BARAKA" },
       {
         property: "og:description",
         content:
-          "Réalisations BTS SIO SLAM avec filtres par catégorie et techno.",
+          "Réalisations BTS SIO SLAM. Recherche par nom de projet ou technologie.",
       },
     ],
   }),
@@ -27,48 +27,43 @@ export const Route = createFileRoute("/projets/")({
 function ProjetsPage() {
   useReveal();
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<string>("Toutes");
-  const [tech, setTech] = useState<string>("Toutes");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return projects.filter((p) => {
-      if (category !== "Toutes" && p.category !== category) return false;
-      if (tech !== "Toutes" && !p.tech.includes(tech)) return false;
-      if (!q) return true;
-      return (
+    if (!q) return projects;
+    return projects.filter(
+      (p) =>
         p.name.toLowerCase().includes(q) ||
         p.short.toLowerCase().includes(q) ||
-        p.tech.some((t) => t.toLowerCase().includes(q))
-      );
-    });
-  }, [query, category, tech]);
+        p.tech.some((t) => t.toLowerCase().includes(q)),
+    );
+  }, [query]);
 
   return (
     <Section>
-      <div className="reveal mb-8">
+      <div className="reveal mb-10 border-b border-border pb-8">
         <Eyebrow>Réalisations</Eyebrow>
-        <h1 className="font-display text-3xl font-extrabold sm:text-4xl">
-          Projets techniques
+        <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+          Projets
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
-          Filtre par catégorie ou techno, ou cherche directement. Clique sur un
-          projet pour voir le détail.
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Sélection de réalisations professionnelles et personnelles.
+          Recherchez par nom ou par technologie.
         </p>
       </div>
 
-      {/* Filters */}
-      <div className="reveal mb-8 flex flex-col gap-4 rounded-2xl border bg-surface p-4 sm:p-5">
-        <div className="relative">
+      {/* Search */}
+      <div className="reveal mb-10">
+        <div className="relative max-w-xl">
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Rechercher un projet, une techno..."
-            className="w-full rounded-lg border bg-background px-4 py-2.5 pr-10 text-sm outline-none transition-colors focus:border-primary"
+            placeholder="Rechercher un projet ou une technologie…"
+            className="w-full rounded-lg border bg-surface px-4 py-3 pr-11 text-sm outline-none transition-colors focus:border-primary"
           />
           <svg
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -80,49 +75,38 @@ function ProjetsPage() {
             <path d="m20 20-3.5-3.5" />
           </svg>
         </div>
-
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Pills
-            label="Catégorie"
-            value={category}
-            onChange={setCategory}
-            options={["Toutes", ...allCategories]}
-          />
-        </div>
-        <div>
-          <Pills
-            label="Techno"
-            value={tech}
-            onChange={setTech}
-            options={["Toutes", ...allTechs]}
-          />
+        <div className="mt-3 text-xs text-muted-foreground">
+          {filtered.length} projet{filtered.length > 1 ? "s" : ""} affiché
+          {filtered.length > 1 ? "s" : ""}
         </div>
       </div>
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <div className="rounded-2xl border bg-surface p-10 text-center text-sm text-muted-foreground">
-          Aucun projet ne correspond à ces filtres.
+        <div className="rounded-2xl border bg-surface p-12 text-center text-sm text-muted-foreground">
+          Aucun projet ne correspond à cette recherche.
         </div>
       ) : (
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
             <Link
               key={p.slug}
               to="/projets/$slug"
               params={{ slug: p.slug }}
-              className="reveal group flex flex-col gap-3 rounded-2xl border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-card"
+              className="reveal group flex flex-col gap-4 rounded-2xl border bg-surface p-7 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-card"
             >
-              {p.featured && (
-                <span className="w-fit rounded border border-accent/30 bg-gradient-to-br from-primary/20 to-accent/20 px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-[color:var(--accent-2)]">
-                  ⭐ Projet principal
-                </span>
-              )}
               <div className="flex items-start justify-between gap-3">
-                <div className="font-display text-base font-bold">
-                  {p.name}
-                </div>
-                <span className="text-xl">{p.emoji}</span>
+                <span className="rounded border bg-surface-2 px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-[0.08em] text-muted-foreground">
+                  {p.category}
+                </span>
+                {p.featured && (
+                  <span className="rounded border border-primary/30 bg-primary/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-primary">
+                    Phare
+                  </span>
+                )}
+              </div>
+              <div className="font-display text-xl font-semibold tracking-tight">
+                {p.name}
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
                 {p.short}
@@ -137,55 +121,13 @@ function ProjetsPage() {
                   </span>
                 ))}
               </div>
-              <div className="mt-auto flex items-center justify-between pt-2">
-                <span className="text-xs font-semibold text-primary group-hover:text-[color:var(--accent-2)]">
-                  → Voir détails
-                </span>
-                <span className="rounded border bg-surface-2 px-2 py-0.5 text-[0.65rem] text-muted-foreground">
-                  {p.category}
-                </span>
+              <div className="mt-auto border-t pt-4 text-xs font-medium text-primary group-hover:text-foreground">
+                Voir le détail →
               </div>
             </Link>
           ))}
         </div>
       )}
     </Section>
-  );
-}
-
-function Pills({
-  label,
-  value,
-  onChange,
-  options,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
-}) {
-  return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-        {label}
-      </span>
-      {options.map((opt) => {
-        const active = opt === value;
-        return (
-          <button
-            type="button"
-            key={opt}
-            onClick={() => onChange(opt)}
-            className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-              active
-                ? "border-primary bg-primary/15 text-primary"
-                : "border-border bg-surface-2 text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {opt}
-          </button>
-        );
-      })}
-    </div>
   );
 }
