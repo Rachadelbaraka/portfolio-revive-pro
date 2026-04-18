@@ -21,8 +21,8 @@ export function Section({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <div className="mb-3.5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-primary">
-      <span className="h-px w-5 bg-primary" />
+    <div className="mb-4 inline-flex items-center gap-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary">
+      <span className="h-px w-6 bg-primary" />
       {children}
     </div>
   );
