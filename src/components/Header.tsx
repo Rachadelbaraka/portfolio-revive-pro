@@ -10,8 +10,8 @@ const links: NavLink[] = [
   { to: "/competences", label: "Compétences" },
   { to: "/experience", label: "Expérience" },
   { to: "/veille", label: "Veille" },
-  { to: "/e5", label: "Épreuve E5", highlight: true },
-  { to: "/contact", label: "Contact" },
+  { to: "/e5", label: "Épreuve E5" },
+  { to: "/contact", label: "Contact", highlight: true },
 ];
 
 export function Header() {
@@ -56,7 +56,7 @@ export function Header() {
                 <Link
                   key={l.to}
                   to={l.to as never}
-                  className="ml-1 rounded-md bg-gradient-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                  className="ml-2 rounded-md bg-foreground px-3.5 py-1.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
                 >
                   {l.label}
                 </Link>
@@ -150,7 +150,7 @@ export function Header() {
                 to={l.to as never}
                 className={`rounded-md px-3 py-2 text-sm font-medium ${
                   l.highlight
-                    ? "bg-gradient-primary text-primary-foreground"
+                    ? "bg-foreground text-background"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
               >
